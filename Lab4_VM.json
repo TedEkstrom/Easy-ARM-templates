@@ -36,7 +36,7 @@
                     "osDisk": {
                         "osType": "Windows",
                         "createOption": "FromImage",
-                        "caching": "ReadWrite"
+                        "caching": "ReadWrite",
                         "deleteOption": "Delete"
                     },
                     "dataDisks": [],

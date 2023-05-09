@@ -38,8 +38,7 @@
                         "name": "[concat(parameters('virtualMachines_test_name'), '_OsDisk_1_0d9cebf1f71e464ea7f36054f10c8d34')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
-                        "managedDisk": {
-                            "id": "[parameters('disks_test_OsDisk_1_0d9cebf1f71e464ea7f36054f10c8d34_externalid')]"
+                        "managedDisk":
                         },
                         "deleteOption": "Delete"
                     },

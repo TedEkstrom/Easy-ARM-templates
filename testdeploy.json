@@ -13,18 +13,7 @@
         "networkInterfaces_test775_externalid": {
             "defaultValue": "/subscriptions/425e7bfc-133c-4bac-83c0-93abef2af5a0/resourceGroups/test2/providers/Microsoft.Network/networkInterfaces/test775",
             "type": "String"
-        },
-        "user": {
-        "type": "string",
-        "defaultValue": "azureuser",
-        "metadata": {
-        "description": "Username for the Virtual Machine."
-       },
-        "psw": {
-        "type": "securestring",
-        "metadata": {
-        "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
-       } 
+        }
     },
     "variables": {},
     "resources": [
@@ -57,7 +46,7 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_test_name')]",
-                    "adminUsername": "adminuser",
+                    "adminUsername": "[concat('admin', parameters('virtualMachines_test_name'))]",
                     "adminPassword": "Passw0rd12345",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,

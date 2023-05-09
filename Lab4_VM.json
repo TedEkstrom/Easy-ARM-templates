@@ -55,16 +55,6 @@
                     "allowExtensionOperations": true,
                     "requireGuestProvisionSignal": true
                 },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[parameters('networkInterfaces_test16_externalid')]",
-                            "properties": {
-                                "deleteOption": "Detach"
-                            }
-                        }
-                    ]
-                },
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true

@@ -2,80 +2,53 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_test_name": {
+        "containerGroups_test_name": {
             "defaultValue": "test",
-            "type": "String"
-        },
-        "disks_test_OsDisk_1_dbce36cb4eed4d478206c839c1068b6f_externalid": {
-            "defaultValue": "/subscriptions/425e7bfc-133c-4bac-83c0-93abef2af5a0/resourceGroups/test2/providers/Microsoft.Compute/disks/test_OsDisk_1_dbce36cb4eed4d478206c839c1068b6f",
-            "type": "String"
-        },
-        "networkInterfaces_test775_externalid": {
-            "defaultValue": "/subscriptions/425e7bfc-133c-4bac-83c0-93abef2af5a0/resourceGroups/test2/providers/Microsoft.Network/networkInterfaces/test775",
             "type": "String"
         }
     },
     "variables": {},
     "resources": [
         {
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2023-03-01",
-            "name": "[parameters('virtualMachines_test_name')]",
-            "location": "westeurope",
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2023-05-01",
+            "name": "[parameters('containerGroups_test_name')]",
+            "location": "northeurope",
             "properties": {
-                "hardwareProfile": {
-                    "vmSize": "Standard_B1s"
-                },
-                "storageProfile": {
-                    "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "2022-datacenter-azure-edition",
-                        "version": "[concat('la', parameters('virtualMachines_test_name'))]"
-                    },
-                    "osDisk": {
-                        "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_test_name'), '_OsDisk_1_dbce36cb4eed4d478206c839c1068b6f')]",
-                        "createOption": "FromImage",
-                        "caching": "ReadWrite",
-                        "deleteOption": "Delete",
-                        "diskSizeGB": 127
-                    },
-                    "dataDisks": [],
-                    "diskControllerType": "SCSI"
-                },
-                "osProfile": {
-                    "computerName": "[parameters('virtualMachines_test_name')]",
-                    "adminUsername": "[concat('admin', parameters('virtualMachines_test_name'))]",
-                    "adminPassword": "Passw0rd12345",
-                    "windowsConfiguration": {
-                        "provisionVMAgent": true,
-                        "enableAutomaticUpdates": true,
-                        "patchSettings": {
-                            "patchMode": "AutomaticByOS",
-                            "assessmentMode": "ImageDefault",
-                            "enableHotpatching": false
-                        },
-                        "enableVMAgentPlatformUpdates": false
-                    },
-                    "secrets": [],
-                    "allowExtensionOperations": true
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[parameters('networkInterfaces_test775_externalid')]",
-                            "properties": {
-                                "deleteOption": "Detach"
+                "sku": "Standard",
+                "containers": [
+                    {
+                        "name": "[parameters('containerGroups_test_name')]",
+                        "properties": {
+                            "image": "[concat('mcr.microsoft.com/azuredocs/aci-helloworld:la', parameters('containerGroups_test_name'))]",
+                            "ports": [
+                                {
+                                    "protocol": "TCP",
+                                    "port": 80
+                                }
+                            ],
+                            "environmentVariables": [],
+                            "resources": {
+                                "requests": {
+                                    "memoryInGB": 1.5,
+                                    "cpu": 1
+                                }
                             }
                         }
-                    ]
-                },
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": true
                     }
-                }
+                ],
+                "initContainers": [],
+                "restartPolicy": "OnFailure",
+                "ipAddress": {
+                    "ports": [
+                        {
+                            "protocol": "TCP",
+                            "port": 80
+                        }
+                    ],
+                    "type": "Public"
+                },
+                "osType": "Linux"
             }
         }
     ]

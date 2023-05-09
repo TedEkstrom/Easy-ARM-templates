@@ -38,10 +38,6 @@
                         "name": "[concat(parameters('virtualMachines_test_name'), '_OsDisk_1_dbce36cb4eed4d478206c839c1068b6f')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
-                        "managedDisk": {
-                            "storageAccountType": "Standard_LRS",
-                            "id": "[parameters('disks_test_OsDisk_1_dbce36cb4eed4d478206c839c1068b6f_externalid')]"
-                        },
                         "deleteOption": "Delete",
                         "diskSizeGB": 127
                     },

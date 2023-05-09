@@ -47,6 +47,8 @@
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_test_name')]",
                     "adminUsername": "[concat('admin', parameters('virtualMachines_test_name'))]",
+                    "computerName": "[variables('vmName')]",
+                    "adminPassword": "[parameters('adminPasswordOrKey')]",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true,

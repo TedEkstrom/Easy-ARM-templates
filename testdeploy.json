@@ -14,13 +14,13 @@
             "defaultValue": "/subscriptions/425e7bfc-133c-4bac-83c0-93abef2af5a0/resourceGroups/test2/providers/Microsoft.Network/networkInterfaces/test775",
             "type": "String"
         },
-        "adminUsername": {
+        "VMadminUsername": {
         "type": "string",
         "defaultValue": "azureuser",
         "metadata": {
         "description": "Username for the Virtual Machine."
        },
-        "adminPasswordOrKey": {
+        "VMadminPasswordOrKey": {
         "type": "securestring",
         "metadata": {
         "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
@@ -57,8 +57,8 @@
                 },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_test_name')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPasswordOrKey')]",
+                    "adminUsername": "[parameters('VMadminUsername')]",
+                    "adminPassword": "[parameters('VMadminPasswordOrKey')]",
                     "computerName": "[variables('vmName')]",
                    
                     "windowsConfiguration": {
